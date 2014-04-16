@@ -20,6 +20,12 @@ void initializeRobot() //has to be here for some reason, just leave it
   return;
 }
 
+void Stop() //just a function to be called at other points, allows the robot to be stopped without having to type these two functions out
+	{
+		motor[motorA] = 0;
+		motor[motorB] = 0;
+
+	}
 
 void goForward(int nTime) //a function that we defined so that we could call it at other points in the code, it makes the code much cleaner and allows you to do less work in the long run
 	{
@@ -35,18 +41,15 @@ void turnLeft(int nTime)//similar to goForward(), except it will cause the robot
 		motor[motorA] = 0;
 		motor[motorB] = 50; //sets only one motor to move, this executes a swing turn
 		wait1Msec(nTime); //waits for a certain amount of time
-		motor[motorB] = 0; //stop the motor, the robot is not moving at this point
+		Stop();
 	}
 
 
 task main() //this is the main function of the autonomous code, this is what will be run when the robot starts. it calls the predefined functions. all this code does is move the robot forward and then stop it
 {
   waitForStart();
-   wait1Msec(50);
    servo[servo1] = 230; //we were having a problem with the arm hitting the ground, so this just raised our arm high so that it didnt run on the ground
-   goForward();
-   wait1Msec(3500);
-   Stop();
+   goForward(3500);
 
 
   /* while(true)
